@@ -296,13 +296,76 @@ namespace cmdblets
 
         }      
     }
+    [Cmdlet(VerbsCommon.Push, "CMDBFunction", DefaultParameterSetName = "No")]
+    public class PushCMDBFunctionCommand : EntityTypes
+    {
+        // Parameters
+        private string _name;
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        protected override void ProcessRecord()
+        {
+            base.BeginProcessing();
+            try
+            {
+                var attributes = _clientconnection.callFunction(_name,null);
+                foreach (var attribute in attributes)
+                {
+                    WriteObject(attribute);
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+
+                WriteError(new ErrorRecord(e, "Unknown error", ErrorCategory.NotSpecified, _name));
+            }
+
+        }
+    }
+    [Cmdlet(VerbsCommon.Set, "CMDBLookup", DefaultParameterSetName = "No")]
+    public class SetCMDBLookupCommand : EntityTypes
+    {
+        // Parameters
+        private lookup _lookup;
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public lookup Lookup
+        {
+            get { return _lookup; }
+            set { _lookup = value; }
+        }
+
+        protected override void ProcessRecord()
+        {
+            base.BeginProcessing();
+            try
+            {
+                var up = _clientconnection.updateLookup(_lookup);
+                WriteObject(up);
+
+
+            }
+            catch (Exception e)
+            {
+
+                WriteError(new ErrorRecord(e, "Unknown error", ErrorCategory.NotSpecified, _lookup));
+            }
+
+        }
+    }
     [Cmdlet(VerbsCommon.Get, "CMDBRelationshipObjectHistory", DefaultParameterSetName = "No")]
     public class GetCMDBRelationshipObjectHistoryCommand : EntityTypes
     {
         // Parameters
         private relation _relation;
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public relation RelationName
+        public relation RelationObject
         {
             get { return _relation; }
             set { _relation = value; }
@@ -335,6 +398,36 @@ namespace cmdblets
         }
     }
 
+    [Cmdlet(VerbsCommon.Remove, "CMDBRelationshipObject", DefaultParameterSetName = "No")]
+    public class RemoveCMDBRelationshipObjectCommand : EntityTypes
+    {
+        // Parameters
+        private relation _relation;
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public relation RelationObject
+        {
+            get { return _relation; }
+            set { _relation = value; }
+        }
+
+        protected override void ProcessRecord()
+        {
+            base.BeginProcessing();
+            try
+            {
+                var res = _clientconnection.deleteRelation(_relation);
+                WriteObject(res);
+
+
+            }
+            catch (Exception e)
+            {
+
+                WriteError(new ErrorRecord(e, "Unknown error", ErrorCategory.NotSpecified, _relation));
+            }
+
+        }
+    }
     [Cmdlet(VerbsCommon.Get, "CMDBRelationshipObject", DefaultParameterSetName = "No")]
     public class GetCMDBRelationshipObjectCommand : EntityTypes
     {
