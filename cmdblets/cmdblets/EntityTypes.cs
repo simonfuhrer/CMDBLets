@@ -296,6 +296,44 @@ namespace cmdblets
 
         }      
     }
+    [Cmdlet(VerbsCommon.Get, "CMDBRelationshipObjectHistory", DefaultParameterSetName = "No")]
+    public class GetCMDBRelationshipObjectHistoryCommand : EntityTypes
+    {
+        // Parameters
+        private relation _relation;
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public relation RelationName
+        {
+            get { return _relation; }
+            set { _relation = value; }
+        }
+
+        protected override void ProcessRecord()
+        {
+            base.BeginProcessing();
+            try
+            {
+                var relationHist = _clientconnection.getRelationHistory(_relation);
+
+                if (relationHist != null)
+                {
+                    foreach (var relation in relationHist)
+                    {
+                        WriteObject(relation);
+                    }
+ 
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                WriteError(new ErrorRecord(e, "Unknown error", ErrorCategory.NotSpecified, _relation));
+            }
+
+        }
+    }
 
     [Cmdlet(VerbsCommon.Get, "CMDBRelationshipObject", DefaultParameterSetName = "No")]
     public class GetCMDBRelationshipObjectCommand : EntityTypes
