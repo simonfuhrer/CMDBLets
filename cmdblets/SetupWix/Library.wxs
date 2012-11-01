@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id='4A0ADA51-B5B1-43E4-89D2-507BE74AD453' Name='CMDBuild Powershell Module' Language='1033'
+         Version='1.0.0.0' Manufacturer='Bedag' UpgradeCode='4A0ADA51-B5B1-43E4-89D2-507BE74AD453' >
+    <Package Description='This is the CMDBuild Powershell Module' Platform="x86"
+            Comments='This is the CMDBuild Powershell Module'
+            Manufacturer='Bedag' InstallerVersion='300' Compressed='yes' />
+  </Product>
+</Wix>
