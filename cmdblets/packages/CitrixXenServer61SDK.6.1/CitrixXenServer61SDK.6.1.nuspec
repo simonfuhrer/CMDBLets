@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>CitrixXenServer61SDK</id>
+    <version>6.1</version>
+    <title>Citrix XenServer 6.1 .NET SDK</title>
+    <authors>John McBride</authors>
+    <owners>John McBride</owners>
+    <licenseUrl>http://community.citrix.com/cdn/xs/sdks/</licenseUrl>
+    <projectUrl>http://community.citrix.com/cdn/xs/sdks/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET wrapper for the XenServer 6.1 API. XenServer includes a XML-RPC based API, providing programmatic access to the extensive set of XenServer management features and tools. The XenServer API can be called from a remote system as well as local to the XenServer host. Remote calls are generally made securely over HTTPS, using port 443.
+        There are five SDKs available, one for each of C, C#, Java, PowerShell, and Python. These are provided under an open-source license (LGPL or GPL with the common linking exception). This allows use (unmodified) in both closed-and open-source applications.</description>
+    <summary>.NET wrapper for the XenServer 6.1 API. XenServer includes a XML-RPC based API, providing programmatic access to the extensive set of XenServer management features and tools.</summary>
+    <language>en-US</language>
+    <tags>Citrix,Virtualization,SDK</tags>
+  </metadata>
+</package>

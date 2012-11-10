@@ -54,8 +54,9 @@ namespace cmdblets
             var dict = lists.ToDictionary(key => key.name, value => value);
             
             var as1 = new attribute{ name = prop.name};
-            if (prop.referencedIdClassSpecified)
+            if (prop.referencedIdClassSpecified && newValue.ToString().Length > 0)
             {
+
                 int codeint = 0;
                 int.TryParse(newValue.ToString(), out codeint);
                 if (codeint == 0)
