@@ -50,45 +50,72 @@ namespace cmdblets
         public void AssignNewValue(Cmdlet myCmdlet, attributeSchema prop, card so, object newValue)
         {
             var lists = so.attributeList != null ? so.attributeList.ToList() : new List<attribute>();
-            myCmdlet.WriteVerbose("Want to set " + prop.name + " to " + newValue);
+            
+            myCmdlet.WriteVerbose("Want to set " + prop.name + " to " + newValue.ToString());
             var dict = lists.ToDictionary(key => key.name, value => value);
             
             var as1 = new attribute{ name = prop.name};
-            if (prop.referencedIdClassSpecified && newValue.ToString().Length > 0)
+
+            switch (prop.type)
             {
-
-                int codeint = 0;
-                int.TryParse(newValue.ToString(), out codeint);
-                if (codeint == 0)
-                {
-                    myCmdlet.WriteVerbose("Fulltext search ReferenceCard: " + newValue.ToString());
-                    var refcard = _clientconnection.getCardList(prop.referencedClassName, null, null, null, 1, 0, newValue.ToString(), null);
-
-                    if (refcard.cards != null)
+                case  "DATE":
+                    myCmdlet.WriteVerbose("Convert DateTimeObject");
+                    DateTime xd = DateTime.Parse(newValue.ToString());
+                    as1.value = xd.ToString("dd'/'MM'/'yy");;
+                    break;
+                case "REFERENCE":
+                    if (prop.referencedIdClassSpecified && newValue.ToString().Length > 0)
                     {
-                        var r = refcard.cards.FirstOrDefault();
-                        myCmdlet.WriteVerbose("Card found: " + r.id);
-                        newValue = r.id;
-                    }
-                    else
-                    {
-                        myCmdlet.WriteWarning("Reference Card not found: " + newValue.ToString());
-                        dict.Remove(as1.name);
+
+                        int codeint = 0;
+                        int.TryParse(newValue.ToString(), out codeint);
+                        if (codeint == 0)
+                        {
+                            myCmdlet.WriteVerbose("Fulltext search ReferenceCard: " + newValue.ToString());
+                            myCmdlet.WriteVerbose("Fulltext search classname: " + prop.referencedClassName);
+
+                            var myQuery = new query();
+                            var fil = new filter
+                            {
+                                @operator = "LIKE",
+                                name = "Code",
+                                value = new string[] { "%" + newValue.ToString() + "%" }
+                            };
+                            myQuery.filter = fil;
+                            var refcard = _clientconnection.getCardList(prop.referencedClassName, null, myQuery, null, 1, 0, null, null);
+
+                            if (refcard.cards != null)
+                            {
+                                var r = refcard.cards.FirstOrDefault();
+                                myCmdlet.WriteVerbose("Card found: " + r.id);
+                                newValue = r.id;
+                            }
+                            else
+                            {
+                                myCmdlet.WriteWarning("Reference Card not found: " + newValue.ToString());
+                                dict.Remove(as1.name);
+
+                            }
+                        }
+                        else
+                        {
+                            myCmdlet.WriteVerbose("Check if ReferenceCard exists: " + codeint);
+                            var check = _clientconnection.getCard(prop.referencedClassName, codeint, null);
+                            if (check == null)
+                            {
+                                myCmdlet.WriteWarning("Reference Card not found: " + codeint);
+                                dict.Remove(as1.name);
+                            }
+                        }
+                        as1.code = newValue.ToString();
 
                     }
-                }else
-                {
-                    myCmdlet.WriteVerbose("Check if ReferenceCard exists: " + codeint);
-                    var check = _clientconnection.getCard(prop.referencedClassName, codeint, null);
-                    if (check == null)
-                    {
-                        myCmdlet.WriteWarning("Reference Card not found: " + codeint);
-                        dict.Remove(as1.name);
-                    }
-                }
-                as1.code = newValue.ToString();
+                    break;
+                default:
+                    as1.value = newValue != null ? newValue.ToString() : null;
+                    break;
+
             }
-            as1.value = newValue != null ? newValue.ToString() : null;
             if (dict.ContainsKey(as1.name))
             {
                 dict[as1.name] = as1;
@@ -652,7 +679,7 @@ namespace cmdblets
                 var o = (card)CardObject.BaseObject;
                 if (o != null)
                 {
-
+                    //var resclass2 = _clientconnection.getClassSchema(o.className);
                     var resclass = _clientconnection.getAttributeList(o.className);
                     if (resclass != null)
                     {

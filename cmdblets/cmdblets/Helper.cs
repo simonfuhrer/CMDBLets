@@ -6,7 +6,6 @@ using System.Security;
 using System.Text;
 using System.Management.Automation;
 using cmdblets.CMDBUILD;
-using System.Management.Automation;
 namespace cmdblets
 {
     public class CMDBCmdletBase : PSCmdlet
