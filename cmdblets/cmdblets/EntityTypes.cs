@@ -59,9 +59,17 @@ namespace cmdblets
             switch (prop.type)
             {
                 case  "DATE":
-                    myCmdlet.WriteVerbose("Convert DateTimeObject");
-                    DateTime xd = DateTime.Parse(newValue.ToString());
-                    as1.value = xd.ToString("dd'/'MM'/'yy");;
+                    string valtoset = newValue != null ? newValue.ToString() : null;
+                    if (!string.IsNullOrEmpty(valtoset))
+                    {
+                        try
+                        {
+                            myCmdlet.WriteVerbose("Convert string to DateTimeObject");
+                            DateTime xd = DateTime.Parse(valtoset.ToString(), CultureInfo.InvariantCulture);
+                            as1.value = xd.ToString("dd'/'MM'/'yy");
+                        }
+                        catch (Exception e) { myCmdlet.WriteWarning(e.Message); }
+                    }
                     break;
                 case "REFERENCE":
                     if (prop.referencedIdClassSpecified && newValue.ToString().Length > 0)
