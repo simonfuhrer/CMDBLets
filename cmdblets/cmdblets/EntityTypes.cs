@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
-
+using System.ServiceModel.Channels;
 using cmdblets.CMDBUILD;
 namespace cmdblets
 {
@@ -1246,9 +1246,35 @@ namespace cmdblets
                 ht.Remove(uri);
             }
         }
+
+
+
+
         private static PrivateClient NewClient(string uri, PSCredential credential)
         {
-                var client = new PrivateClient("PrivateImplPort", uri);
+            CustomBinding custBinding = new CustomBinding();
+            MtomMessageEncodingBindingElement elmtom = new MtomMessageEncodingBindingElement();
+            elmtom.MaxWritePoolSize = 2147483647;
+            elmtom.MaxBufferSize = 2147483647;
+            elmtom.MessageVersion = MessageVersion.Soap12;
+
+
+            var ssbe = SecurityBindingElement.CreateUserNameOverTransportBindingElement();
+            ssbe.AllowInsecureTransport = true;
+            ssbe.IncludeTimestamp = false;
+            ssbe.MessageSecurityVersion = MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+            var htt = new HttpTransportBindingElement();
+
+            htt.MaxBufferPoolSize = 2147483647;
+            htt.MaxReceivedMessageSize = 2147483647;
+            htt.MaxBufferSize = 2147483647;
+            EndpointAddress n = new EndpointAddress(uri);
+
+            custBinding.Elements.Add(ssbe);
+            custBinding.Elements.Add(elmtom);
+            custBinding.Elements.Add(htt);
+
+            var client = new PrivateClient(custBinding, n);
                 if (credential != null)
                 {
                     
