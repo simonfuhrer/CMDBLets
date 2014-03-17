@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:tns="http://proxy.sun/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://soap.services.cmdbuild.org" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="$Proxy69Service" targetNamespace="http://proxy.sun/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://soap.services.cmdbuild.org" location="http://cmdb.mgmtbi.ch/cmdbuild/services/soap/Private?wsdl=Private.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="$Proxy69ServiceSoapBinding" type="ns1:Private">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getRelationHistory">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getRelationHistory">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRelationHistoryResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getRelationList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRelationListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMenuSchema">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getMenuSchema">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMenuSchemaResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="updateCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="uploadAttachment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="uploadAttachment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="uploadAttachmentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getLookupList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getLookupListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateLookup">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="updateLookup">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateLookupResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivityMenuSchema">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getActivityMenuSchema">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getActivityMenuSchemaResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReference">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getReference">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getReferenceResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="deleteCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createLookup">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="createLookup">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createLookupResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBuiltInReport">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getBuiltInReport">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getBuiltInReportResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReportList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getReportList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getReportListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLookup">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="deleteLookup">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteLookupResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkflow">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="updateWorkflow">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateWorkflowResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttributeList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getAttributeList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAttributeListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createRelationWithAttributes">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="createRelationWithAttributes">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createRelationWithAttributesResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttachmentList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getAttachmentList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAttachmentListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFunctionList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getFunctionList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getFunctionListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardListExt">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCardListExt">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardListExtResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadAttachment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="downloadAttachment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="downloadAttachmentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRelation">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="deleteRelation">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteRelationResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivityObjects">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getActivityObjects">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getActivityObjectsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupById">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getLookupById">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getLookupByIdResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateAttachmentDescription">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="updateAttachmentDescription">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateAttachmentDescriptionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sync">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="sync">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="syncResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardMenuSchema">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCardMenuSchema">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardMenuSchemaResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAttachment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="deleteAttachment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteAttachmentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardList">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCardList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createRelation">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="createRelation">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createRelationResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardHistory">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCardHistory">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardHistoryResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReport">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getReport">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getReportResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getUserInfo">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUserInfoResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationAttributes">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getRelationAttributes">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRelationAttributesResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardWithLongDateFormat">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCardWithLongDateFormat">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardWithLongDateFormatResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="notify">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="notify">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="notifyResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupListByCode">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getLookupListByCode">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getLookupListByCodeResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generateDigest">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="generateDigest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="generateDigestResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="NoSuchAlgorithmException">
+        <soap12:fault use="literal" name="NoSuchAlgorithmException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProcessHelp">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getProcessHelp">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProcessHelpResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReportParameters">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getReportParameters">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getReportParametersResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callFunction">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="callFunction">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="callFunctionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="createCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardListWithLongDateFormat">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getCardListWithLongDateFormat">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCardListWithLongDateFormatResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchema">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="getClassSchema">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getClassSchemaResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="$Proxy69Service">
+    <wsdl:port name="$Proxy69Port" binding="tns:_x0024_Proxy69ServiceSoapBinding">
+      <soap12:address location="http://cmdb.mgmtbi.ch/cmdbuild/services/soap/Private" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

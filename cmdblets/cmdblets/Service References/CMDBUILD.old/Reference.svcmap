@@ -18,11 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://cmdb.mgmtbi.ch/cmdbuild/services/soap/Private?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.2.224:8080/cmdb/services/soap/Private?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="$Proxy69Service.wsdl" MetadataType="Wsdl" ID="69aaa493-263c-4a6c-b2a5-d003c4b9a86b" SourceId="1" SourceUrl="http://cmdb.mgmtbi.ch/cmdbuild/services/soap/Private?wsdl" />
-    <MetadataFile FileName="Private.wsdl" MetadataType="Wsdl" ID="e23d89a6-09b0-4b57-8dd3-3ab1105832a3" SourceId="1" SourceUrl="http://cmdb.mgmtbi.ch/cmdbuild/services/soap/Private?wsdl=Private.wsdl" />
+    <MetadataFile FileName="PrivateImplService.wsdl" MetadataType="Wsdl" ID="cde93e54-3d25-46c0-93aa-a0191da487f5" SourceId="1" SourceUrl="http://192.168.2.224:8080/cmdb/services/soap/Private?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
