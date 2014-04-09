@@ -47,15 +47,36 @@ namespace cmdblets
             return promotedObject;
         }
 
+        public int GetCardbyCode(string referencedClassName, string code)
+        {
+            int returnvalue = 0;
+            var myQuery = new query();
+            var fil = new filter
+            {
+                @operator = "LIKE",
+                name = "Code",
+                value = new string[] { "%" + code + "%" }
+            };
+            myQuery.filter = fil;
+            var cardfound = _clientconnection.getCardList(referencedClassName, null, myQuery, null, 1, 0, null, null);
+            if (cardfound.cards != null)
+            {
+                var r = cardfound.cards.FirstOrDefault();
+                returnvalue = r.id;
+            }
+            return returnvalue;
+        }
+
         public void AssignNewValue(Cmdlet myCmdlet, attributeSchema prop, card so, object newValue)
         {
+            if (newValue == null) { return; } // Hacky Workaround
             var lists = so.attributeList != null ? so.attributeList.ToList() : new List<attribute>();
-            
+          
             myCmdlet.WriteVerbose("Want to set " + prop.name + " to " + newValue.ToString());
+                
+         
             var dict = lists.ToDictionary(key => key.name, value => value);
-            
             var as1 = new attribute{ name = prop.name};
-
             switch (prop.type)
             {
                 case  "DATE":
@@ -64,9 +85,22 @@ namespace cmdblets
                     {
                         try
                         {
-                            myCmdlet.WriteVerbose("Convert string to DateTimeObject");
-                            DateTime xd = DateTime.Parse(valtoset.ToString(), CultureInfo.InvariantCulture);
-                            as1.value = xd.ToString("dd'/'MM'/'yy");
+                            myCmdlet.WriteVerbose("DATE: Convert string to DateTimeObject");
+                            DateTime xd = DateTime.Parse(valtoset.ToString(), CultureInfo.CurrentCulture);
+                            as1.value = xd.ToString("yyyy-MM-ddThh:mm:ssZ");
+                        }
+                        catch (Exception e) { myCmdlet.WriteWarning(e.Message); }
+                    }
+                    break;
+                case "TIMESTAMP":
+                    string datetimetoset = newValue != null ? newValue.ToString() : null;
+                    if (!string.IsNullOrEmpty(datetimetoset))
+                    {
+                        try
+                        {
+                            myCmdlet.WriteVerbose("TIMESTAMP: Convert string to DateTimeObject -> _" + datetimetoset.ToString() +"_");
+                            DateTime xd = DateTime.Parse(datetimetoset.ToString(), CultureInfo.CurrentCulture);
+                            as1.value = xd.ToString("yyyy-MM-ddThh:mm:ssZ");
                         }
                         catch (Exception e) { myCmdlet.WriteWarning(e.Message); }
                     }
@@ -79,43 +113,58 @@ namespace cmdblets
                         int.TryParse(newValue.ToString(), out codeint);
                         if (codeint == 0)
                         {
-                            myCmdlet.WriteVerbose("Fulltext search ReferenceCard: " + newValue.ToString());
-                            myCmdlet.WriteVerbose("Fulltext search classname: " + prop.referencedClassName);
-
-                            var myQuery = new query();
-                            var fil = new filter
+                            myCmdlet.WriteVerbose("Try it with Workaround Parent Class: " + prop.referencedClassName);
+                            int tmpvalue = 0;
+                            var parentclass = _clientconnection.getAttributeList(prop.referencedClassName);
+                            foreach (attributeSchema attributeschema in parentclass)
                             {
-                                @operator = "LIKE",
-                                name = "Code",
-                                value = new string[] { "%" + newValue.ToString() + "%" }
-                            };
-                            myQuery.filter = fil;
-                            var refcard = _clientconnection.getCardList(prop.referencedClassName, null, myQuery, null, 1, 0, null, null);
+                                if (attributeschema.name == as1.name)
+                                {
+                                    string newclassname = attributeschema.referencedClassName;
+                                    myCmdlet.WriteVerbose("Try it with Fulltext search classname: " + newclassname);
+                                    tmpvalue = GetCardbyCode(newclassname, newValue.ToString());
+                                    if (tmpvalue == 0)
+                                    {
+                                        myCmdlet.WriteWarning("Reference Card not found: " + newValue.ToString());
+                                        dict.Remove(as1.name);
+                                    }
+                                    else
+                                    {
+                                        myCmdlet.WriteVerbose("Card found: " + tmpvalue);
+                                        newValue = tmpvalue;
+                                    }
 
-                            if (refcard.cards != null)
+                                    break;
+                                }
+                            }
+
+                            
+                            if (tmpvalue == 0)
                             {
-                                var r = refcard.cards.FirstOrDefault();
-                                myCmdlet.WriteVerbose("Card found: " + r.id);
-                                newValue = r.id;
+                                myCmdlet.WriteVerbose("Fulltext search ReferenceCard: " + newValue.ToString());
+                                myCmdlet.WriteVerbose("Fulltext search classname: " + prop.referencedClassName);
+                                tmpvalue = GetCardbyCode(prop.referencedClassName, newValue.ToString());
+                                newValue = tmpvalue;
                             }
                             else
                             {
-                                myCmdlet.WriteWarning("Reference Card not found: " + newValue.ToString());
-                                dict.Remove(as1.name);
-
+                                myCmdlet.WriteVerbose("Card found Set to Value: " + tmpvalue);
+                                newValue = tmpvalue;
                             }
+ 
                         }
                         else
                         {
-                            myCmdlet.WriteVerbose("Check if ReferenceCard exists: " + codeint);
-                            var check = _clientconnection.getCard(prop.referencedClassName, codeint, null);
-                            if (check == null)
-                            {
-                                myCmdlet.WriteWarning("Reference Card not found: " + codeint);
-                                dict.Remove(as1.name);
-                            }
+
+                            //myCmdlet.WriteVerbose("Check if ReferenceCard exists: " + codeint);
+                            //var check = _clientconnection.getCard(prop.referencedClassName, codeint, null);
+                            //if (check == null)
+                            //{
+                            //    myCmdlet.WriteWarning("Reference Card not found: " + codeint);
+                            //    dict.Remove(as1.name);
+                            //}
                         }
-                        as1.code = newValue.ToString();
+                        as1.value = newValue.ToString();
 
                     }
                     break;
@@ -689,6 +738,7 @@ namespace cmdblets
                 {
                     //var resclass2 = _clientconnection.getClassSchema(o.className);
                     var resclass = _clientconnection.getAttributeList(o.className);
+                    WriteVerbose("Class: " + o.className);
                     if (resclass != null)
                     {
                         var ht = new Hashtable(StringComparer.OrdinalIgnoreCase);
@@ -708,7 +758,24 @@ namespace cmdblets
                             }
                         }
 
+                        var cardht = new Hashtable(StringComparer.OrdinalIgnoreCase);
+                        foreach (attribute d in o.attributeList)
+                        {
+                            try
+                            {
+                                cardht.Add(d.name, d);
+                            }
+                            catch (Exception e)
+                            {
+                                WriteError(new ErrorRecord(e,
+                                                           "property '" + d.name +
+                                                           "' has already been added to collection cardht",
+                                                           ErrorCategory.InvalidOperation, d));
+                            }
+                        }
+
                         var ht2 = new Hashtable(StringComparer.OrdinalIgnoreCase);
+
                         foreach (var pr in CardObject.Properties)
                         {
                             WriteVerbose(string.Format("Prop Name: {0} PropValue: {1}", pr.Name, pr.Value));
@@ -723,11 +790,13 @@ namespace cmdblets
                                 var p = ht[s] as attributeSchema;
                                 if (p != null)
                                 {
-                                    WriteVerbose(p.name);
-                                    AssignNewValue(this,p, o, ht2[s]);
+                                    WriteVerbose("Assign Value");
+                                    AssignNewValue(this, p, o, ht2[s]);
+
                                 }
                             }
                         }
+                        WriteVerbose("Update Card now");
                         var returnval = _clientconnection.updateCard(o);
                         WriteObject(returnval);
                     }
@@ -964,6 +1033,17 @@ namespace cmdblets
                     {
                         foreach (var c in cards.cards)
                         {
+                            var attrarray = _clientconnection.getAttributeList(c.className).ToList();
+                            foreach (attribute n1 in c.attributeList)
+                            {
+                                foreach (attributeSchema as1 in attrarray){
+                                    if (as1.type == "REFERENCE" && as1.name == n1.name)
+                                    {
+                                        n1.value = n1.code;
+                                        break;
+                                    }
+                                }
+                            }
                             WriteObject(AdaptCardObject(this,c));
                         }
                     }
